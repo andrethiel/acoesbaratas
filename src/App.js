@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "@chakra-ui/react";
+import { Container, Table, Td, Thead, Tr } from "@chakra-ui/react";
 import ModalDisclaimer from "./Modal";
 import axios from "axios";
 
@@ -20,6 +20,14 @@ function App() {
   return (
     <Container>
       <ModalDisclaimer open={show} buscar={buscar} />
+      <Table>
+        <Thead>
+          <Tr>
+            <Td>Ticker Ação</Td>
+            <Td>Preço</Td>
+          </Tr>
+        </Thead>
+      </Table>
     </Container>
   );
 }
