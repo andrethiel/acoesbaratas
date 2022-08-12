@@ -22,7 +22,11 @@ function ModalDisclaimer({ open, close }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button bg={"#4BD963"} _hover={{ bg: "#228b22" }} onClick={close}>
+          <Button
+            bg={"#4BD963"}
+            _hover={{ bg: "#228b22" }}
+            onClick={() => close()}
+          >
             Buscar ações
           </Button>
         </ModalFooter>

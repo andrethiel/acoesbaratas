@@ -8,16 +8,18 @@ function App() {
 
   const handleClose = () => setShow(false);
 
-  const busca = async () => {
+  async function buscar() {
     const response = await axios.get(
       "https://acoesbaratas.herokuapp.com/buscaracoes"
     );
-    console.log(response);
-  };
+    if (response.data.length > 0) {
+      setShow(false);
+    }
+  }
 
   return (
     <Container>
-      <ModalDisclaimer open={show} close={() => busca} />
+      <ModalDisclaimer open={show} buscar={buscar} />
     </Container>
   );
 }
