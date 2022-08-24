@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function ModalDisclaimer({ open, close }) {
+function ModalDisclaimer({ open, buscar }) {
   return (
     <Modal isOpen={open}>
       <ModalOverlay />
@@ -25,7 +25,7 @@ function ModalDisclaimer({ open, close }) {
           <Button
             bg={"#4BD963"}
             _hover={{ bg: "#228b22" }}
-            onClick={() => close()}
+            onClick={() => buscar()}
           >
             Buscar ações
           </Button>
