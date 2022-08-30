@@ -10,6 +10,7 @@ import {
   Tr,
   Text,
   Center,
+  Heading,
 } from "@chakra-ui/react";
 import ModalDisclaimer from "./Modal";
 import axios from "axios";
@@ -29,7 +30,9 @@ function App() {
     setTimeout(() => {
       setFrase("fazendo a seleção das ações mais baratas");
     }, 10000);
-    const response = await axios.get("http://170.80.208.69:9500/buscaracoes");
+    const response = await axios.get(
+      "https://6zdnxktlcj.execute-api.sa-east-1.amazonaws.com/Prod/BuscarAcoes"
+    );
     if (response.data.length > 0) {
       setPlay(false);
       setDados(response.data);
@@ -61,41 +64,55 @@ function App() {
 
   return (
     <TableContainer marginTop={10}>
-      <Center>
-        <Table size={"md"}>
-          <Thead>
-            <Tr>
-              <Th>Ticker Ação</Th>
-              <Th>Preço</Th>
-              <Th>Margem EBIT</Th>
-              <Th>EV/EBIT</Th>
-              <Th>Div.Yield</Th>
-              <Th>Volume Financ.(R$)</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {dados.map((item) => (
+      <Container size={"lg"}>
+        <Center flexDirection={"column"}>
+          <div style={{ margin: 50 }}>
+            <Heading>Lista das ações mais baratas da bolsa</Heading>
+          </div>
+          <Table>
+            <Thead>
               <Tr>
-                <Td>{item.acao}</Td>
-                <Td>
-                  {item.preco.toLocaleString(
-                    "pt-br",
-                    {
-                      style: "currency",
-                      currency: "BRL",
-                    },
-                    { minimumFractionDigits: 2 }
-                  )}
-                </Td>
-                <Td>{item.margem}</Td>
-                <Td>{item.ebit}</Td>
-                <Td>{item.dividendo}</Td>
-                <Td>{item.financeiro}</Td>
+                <Th>Ticker Ação</Th>
+                <Th>Preço</Th>
+                <Th>Margem EBIT</Th>
+                <Th>EV/EBIT</Th>
+                <Th>Div.Yield</Th>
+                <Th>Volume Financ.(R$)</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Center>
+            </Thead>
+            <Tbody>
+              {dados.map((item) => (
+                <Tr>
+                  <Td>{item.acao}</Td>
+                  <Td>
+                    {item.preco.toLocaleString(
+                      "pt-br",
+                      {
+                        style: "currency",
+                        currency: "BRL",
+                      },
+                      { minimumFractionDigits: 2 }
+                    )}
+                  </Td>
+                  <Td>{item.margem}%</Td>
+                  <Td>{item.ebit}</Td>
+                  <Td>{item.dividendo}%</Td>
+                  <Td>
+                    {item.financeiro.toLocaleString(
+                      "pt-br",
+                      {
+                        style: "currency",
+                        currency: "BRL",
+                      },
+                      { minimumFractionDigits: 0 }
+                    )}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Center>
+      </Container>
     </TableContainer>
   );
 }
